@@ -1,0 +1,17 @@
+.tab.currTab{   
+    background-color: #4f5153;
+    color: #fff;
+    width: 105px;
+}
+
+.tab{
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    
+}
+
+.Y-S-wearher-conitainer{
+    display: flex;
+    gap: 10rem;
+}
