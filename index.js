@@ -10,10 +10,14 @@ const tempture = document.querySelector(".temp");
 const wind_speed = document.querySelector(".wind-speed");
 const humid = document.querySelector(".humid");
 const cloud = document.querySelector(".cloud");
-
+const search_section = document.querySelector(".search-section");
+const your_wether_sec = document.querySelector(".your-wether");
+    
 //variable dec
 let CurrTab = yours_wtr;
 CurrTab.classList.add("currTab");
+let active = CurrTab;
+
 //
 
 
@@ -36,11 +40,21 @@ scr_wtr.addEventListener("click", () => {
 function changetab(click) {
 
     if (CurrTab != click) {
-        console.log("ok");
+      
         CurrTab.classList.remove("currTab");
         CurrTab = click;
         CurrTab.classList.add("currTab");
-
+        if(!search_section.classList.contains("active")){
+        search_section.classList.add("active");
+        your_wether_sec.classList.remove("active");
+    }
+    else{
+        search_section.classList.remove("active");
+        your_wether_sec.classList.add("active"); 
+        yourwtr();
+    }
+    
+        
     }
 }
 //-----tab change function end----------
@@ -72,6 +86,7 @@ async function api_call(cityname) {
 //data-filling////////------------------------
 
 function datafill(weatherData) {
+    your_wether_sec.classList.add("active");
     city.innerText = weatherData?.name;
     tempture.innerText = `${((weatherData?.main?.temp) - 273.15).toFixed(2)} C`
     sky.src = `https://flagcdn.com/144x108/${weatherData?.sys?.country.toLowerCase()}.png`;
@@ -94,13 +109,41 @@ scr_button.addEventListener("click", () => {
 
 
 //your location temp -----------
-
+function yourwtr(){
 navigator.geolocation.getCurrentPosition(showpos);
 function showpos(position){
     const userCoordinates = {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
     }
-}
-console.log(userCoordinates.lat);
+    sessionStorage.setItem("user_coordinates", 
+    JSON.stringify(userCoordinates));
+    fetchwether(userCoordinates);
 
+}
+
+}
+
+//calling api ---of wether----------------
+
+async function fetchwether(codinates){
+
+let usercod = sessionStorage.getItem("user_coordinates");
+let codi = await JSON.parse(usercod);
+let lat = codi.lat;
+let lon = codi.lon;
+try{
+let API_key = "ac7c15cfceeae36d3ff1ed314502d3ce";
+console.log(lat);
+console.log(lon);
+let api = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}`); 
+console.log(api);
+let file = await api.json();
+datafill(file);
+console.log(file);
+}
+catch (e){
+    alert(`fail to fetch loaction ${e}`);
+}
+
+}

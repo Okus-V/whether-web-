@@ -3,7 +3,9 @@
     color: #fff;
     width: 105px;
 }
-
+.active{
+    display: block;
+}
 .tab{
     cursor: pointer;
     padding: 20px;
@@ -14,4 +16,26 @@
 .Y-S-wearher-conitainer{
     display: flex;
     gap: 10rem;
+}
+
+.search-section{
+display: none;
+}
+.wrapper{
+    display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.search-section.active{
+    display: flex;
+}
+
+.your-wether{
+    display: none;
+}
+
+.your-wether.active{
+    display: flex;
 }
