@@ -1,3 +1,28 @@
+*,*::before,*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+:root {
+    --colorDark1: #112D4E;
+    --colorDark2: #3F72AF;
+    --colorLight1: #DBE2EF;
+    --colorLight2: #F9F7F7;
+}
+
+.wrapper{
+    width:100vw;
+    height:100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 5rem;
+    color: var(--colorLight2);
+    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);;
+}
+
+
 .tab.currTab{   
     background-color: #4f5153;
     color: #fff;
@@ -21,12 +46,6 @@
 .search-section{
 display: none;
 }
-.wrapper{
-    display: flex;
-   justify-content: center;
-   align-items: center;
-   flex-direction: column;
-}
 
 .search-section.active{
     display: flex;
@@ -34,8 +53,42 @@ display: none;
 
 .your-wether{
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
 }
 
 .your-wether.active{
     display: flex;
+    
+}
+
+.loading-sceen.active{
+    display: flex;
+}
+.loading-sceen{
+    display: none;
+    justify-content: center;
+    position: relative;
+}
+.loading-sceen span{
+    position: absolute;
+    margin-top: 180px;
+    margin-right: -28px;
+}
+
+.three-cointainer{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+
+}
+
+.windspeed-coin{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }

@@ -2,7 +2,7 @@ const yours_wtr = document.querySelector("[your-weather]");
 const scr_wtr = document.querySelector("[search-weather]");
 const searchbar = document.querySelector(".searchbar");
 const scr_button = document.querySelector(".search-logo");
-const loading = document.querySelector("loading-sceen");
+const loading = document.querySelector(".loading-sceen");
 const city = document.querySelector(".city");
 const sky = document.querySelector(".sky");
 const wtr_logo = document.querySelector(".wtr-logo");
@@ -12,7 +12,7 @@ const humid = document.querySelector(".humid");
 const cloud = document.querySelector(".cloud");
 const search_section = document.querySelector(".search-section");
 const your_wether_sec = document.querySelector(".your-wether");
-    
+
 //variable dec
 let CurrTab = yours_wtr;
 CurrTab.classList.add("currTab");
@@ -49,8 +49,9 @@ function changetab(click) {
         your_wether_sec.classList.remove("active");
     }
     else{
+        your_wether_sec.classList.remove("active");
         search_section.classList.remove("active");
-        your_wether_sec.classList.add("active"); 
+        navigator.geolocation;
         yourwtr();
     }
     
@@ -67,6 +68,8 @@ function changetab(click) {
 //API Fetching and return data for filling by datafill function
 
 async function api_call(cityname) {
+    loading.classList.add("active");
+    your_wether_sec.classList.remove("active");
     let API_key = "ac7c15cfceeae36d3ff1ed314502d3ce";
 
     try {
@@ -77,6 +80,8 @@ async function api_call(cityname) {
     } catch (e) {
         console.log(e);
     }
+    loading.classList.remove("active");
+    your_wether_sec.classList.add("active");
 }
 //API Fetching done
 
@@ -110,6 +115,8 @@ scr_button.addEventListener("click", () => {
 
 //your location temp -----------
 function yourwtr(){
+    
+
 navigator.geolocation.getCurrentPosition(showpos);
 function showpos(position){
     const userCoordinates = {
@@ -119,6 +126,7 @@ function showpos(position){
     sessionStorage.setItem("user_coordinates", 
     JSON.stringify(userCoordinates));
     fetchwether(userCoordinates);
+    
 
 }
 
@@ -127,7 +135,7 @@ function showpos(position){
 //calling api ---of wether----------------
 
 async function fetchwether(codinates){
-
+    loading.classList.add("active");
 let usercod = sessionStorage.getItem("user_coordinates");
 let codi = await JSON.parse(usercod);
 let lat = codi.lat;
@@ -139,11 +147,12 @@ console.log(lon);
 let api = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}`); 
 console.log(api);
 let file = await api.json();
+
 datafill(file);
 console.log(file);
 }
 catch (e){
     alert(`fail to fetch loaction ${e}`);
 }
-
+loading.classList.remove("active");
 }
