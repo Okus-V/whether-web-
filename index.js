@@ -12,15 +12,23 @@ const humid = document.querySelector(".humid");
 const cloud = document.querySelector(".cloud");
 const search_section = document.querySelector(".search-section");
 const your_wether_sec = document.querySelector(".your-wether");
+const grantAccess_scr = document.querySelector(".grant-acess");
 
 //variable dec
 let CurrTab = yours_wtr;
 CurrTab.classList.add("currTab");
 let active = CurrTab;
+var coordinates = sessionStorage.getItem('user_coordinates');
+
 
 //
 
-
+if(coordinates == null){
+    grantAccess_scr.classList.add("active");
+    loading.classList.remove("active");
+}
+else{
+fetchwether();}
 // click handle----------------------------
 yours_wtr.addEventListener("click", () => {
     changetab(yours_wtr)
@@ -47,12 +55,18 @@ function changetab(click) {
         if(!search_section.classList.contains("active")){
         search_section.classList.add("active");
         your_wether_sec.classList.remove("active");
+        grantAccess_scr.classList.remove("active");
+        
     }
     else{
         your_wether_sec.classList.remove("active");
         search_section.classList.remove("active");
-        navigator.geolocation;
-        yourwtr();
+        if(coordinates == null){
+            grantAccess_scr.classList.add("active");
+            loading.classList.remove("active");
+        }
+        else{
+        fetchwether();}
     }
     
         
@@ -60,6 +74,7 @@ function changetab(click) {
 }
 //-----tab change function end----------
 
+//---------grant access button------------
 
 
 
@@ -114,10 +129,11 @@ scr_button.addEventListener("click", () => {
 
 
 //your location temp -----------
-function yourwtr(){
+function yourwt(){
     
-
 navigator.geolocation.getCurrentPosition(showpos);
+}
+
 function showpos(position){
     const userCoordinates = {
         lat: position.coords.latitude,
@@ -125,17 +141,16 @@ function showpos(position){
     }
     sessionStorage.setItem("user_coordinates", 
     JSON.stringify(userCoordinates));
-    fetchwether(userCoordinates);
-    
-
-}
-
+    fetchwether();
 }
 
 //calling api ---of wether----------------
 
-async function fetchwether(codinates){
+async function fetchwether(){
+
+   
     loading.classList.add("active");
+    grantAccess_scr.classList.remove("active");
 let usercod = sessionStorage.getItem("user_coordinates");
 let codi = await JSON.parse(usercod);
 let lat = codi.lat;
@@ -156,3 +171,4 @@ catch (e){
 }
 loading.classList.remove("active");
 }
+

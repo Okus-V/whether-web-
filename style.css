@@ -92,3 +92,28 @@ display: none;
     flex-direction: column;
     align-items: center;
 }
+
+
+.grant-acess{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    
+
+}
+
+.grant-acess button{
+    text-transform: uppercase;
+  padding: 10px 30px;
+  background-color: var(--colorDark2);
+  border: none;
+  border-radius: 5px;
+  color: #DBE2EF;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+.grant-acess.active{
+    display: flex;
+}
