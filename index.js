@@ -13,6 +13,9 @@ const cloud = document.querySelector(".cloud");
 const search_section = document.querySelector(".search-section");
 const your_wether_sec = document.querySelector(".your-wether");
 const grantAccess_scr = document.querySelector(".grant-acess");
+const sky_type = document.querySelector(".sky-type");
+
+
 
 //variable dec
 let CurrTab = yours_wtr;
@@ -110,9 +113,13 @@ async function api_call(cityname) {
 function datafill(weatherData) {
     your_wether_sec.classList.add("active");
     city.innerText = weatherData?.name;
+    sky_type.innerText = weatherData?.weather?.[0]?.description;
     tempture.innerText = `${((weatherData?.main?.temp) - 273.15).toFixed(2)} °C`
     sky.src = `https://flagcdn.com/144x108/${weatherData?.sys?.country.toLowerCase()}.png`;
-    wtr_logo.src = `http://openweathermap.org/img/w/${weatherData?.weather?.[0]?.icon}.png`
+    wtr_logo.src = `http://openweathermap.org/img/w/${weatherData?.weather?.[0]?.icon}.png`;
+    wind_speed.innerText = `${weatherData?.wind?.speed} M/S`;
+    humid.innerText = `${weatherData?.main?.humidity} %`;
+    cloud.innerText = `${weatherData?.clouds?.all} %`;
 }
 //data-filling-done------////////------------------------
 
