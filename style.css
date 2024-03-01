@@ -1,9 +1,12 @@
-*,*::before,*::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Merriweather Sans', sans-serif;
 }
+
 :root {
     --colorDark1: #112D4E;
     --colorDark2: #3F72AF;
@@ -11,109 +14,201 @@
     --colorLight2: #F9F7F7;
 }
 
-.wrapper{
-    width:100vw;
-    height:100vh;
+.wrapper {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 5rem;
+    padding-top: rem;
     color: var(--colorLight2);
-    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);;
-}
-
-
-.tab.currTab{   
-    background-color: #4f5153;
-    color: #fff;
-    width: 105px;
-}
-.active{
-    display: block;
-}
-.tab{
-    cursor: pointer;
-    padding: 20px;
-    display: flex;
+    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);
     
 }
 
-.Y-S-wearher-conitainer{
+.wether-heading {
+    margin-top: 38px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+
+.tab.currTab {
+    background-color: rgba(219, 226, 239, 0.5);
+    color: #fff;
+    border-radius: 5px;
+}
+
+.active {
+    display: block;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 5px;
     display: flex;
-    gap: 10rem;
+    text-transform: capitalize;
 }
 
-.search-section{
-display: none;
+.Y-S-wearher-conitainer {
+    display: flex;
+    gap: 15rem;
 }
 
-.search-section.active{
+
+.search-section {
+    display: none;
+}
+
+.search-section.active {
     display: flex;
 }
 
-.your-wether{
+.searchbar-conitainer {
+    display: flex;
+    margin-top: 10px;
+    width: 500px;
+}
+
+.searchbar::placeholder {
+    color: var(--colorLight1);
+}
+
+.searchbar {
+    width: 90%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba(219, 226, 239, 0.5);
+
+    border: none;
+    padding: 10px 5px 10px 25px;
+    color: var(--colorLight2);
+    font-weight: bold;
+}
+
+.searchbar:focus {
+    outline-color: var(--colorLight1)
+}
+
+.search-logo {
+    margin-left: 25px;
+    padding: unset;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    margin-bottom: 1px;
+    background-color: var(--colorDark2);
+}
+
+
+.scrch-btn {
+    background-color: var(--colorDark2);
+    border: none;
+
+}
+
+.your-wether {
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    margin-top: 50px;
+}
+
+.your-wether.active {
+    display: flex;
 
 }
 
-.your-wether.active{
+.flag_city_con {
     display: flex;
+    gap: 20px;
+}
+
+.city {
+    font-size: 2rem;
     
 }
 
-.loading-sceen.active{
+.sky-type{
+    font-size: 1.5rem;
+}
+.temp{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.three-cointainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+}
+
+
+.windspeed-coin {
+   width: 12rem;
+   padding: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(219, 226, 239, 0.5);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    font-weight:600;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+
+
+.loading-sceen.active {
     display: flex;
 }
-.loading-sceen{
+
+.loading-sceen {
     display: none;
     justify-content: center;
     position: relative;
 }
-.loading-sceen span{
+
+.loading-sceen span {
     position: absolute;
     margin-top: 180px;
     margin-right: -28px;
 }
 
-.three-cointainer{
-    display: flex;
-    flex-direction: row;
-    gap: 5rem;
-
-}
-
-.windspeed-coin{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
 
 
-.grant-acess{
+
+
+.grant-acess {
     display: none;
     flex-direction: column;
     align-items: center;
     gap: 25px;
-    
+
 
 }
 
-.grant-acess button{
+.grant-acess button {
     text-transform: uppercase;
-  padding: 10px 30px;
-  background-color: var(--colorDark2);
-  border: none;
-  border-radius: 5px;
-  color: #DBE2EF;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.85rem;
+    padding: 10px 30px;
+    background-color: var(--colorDark2);
+    border: none;
+    border-radius: 5px;
+    color: #DBE2EF;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
 }
-.grant-acess.active{
+
+.grant-acess.active {
     display: flex;
 }

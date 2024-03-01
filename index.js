@@ -23,12 +23,13 @@ var coordinates = sessionStorage.getItem('user_coordinates');
 
 //
 
-if(coordinates == null){
+if (coordinates == null) {
     grantAccess_scr.classList.add("active");
     loading.classList.remove("active");
 }
-else{
-fetchwether();}
+else {
+    fetchwether();
+}
 // click handle----------------------------
 yours_wtr.addEventListener("click", () => {
     changetab(yours_wtr)
@@ -48,28 +49,29 @@ scr_wtr.addEventListener("click", () => {
 function changetab(click) {
 
     if (CurrTab != click) {
-      
+
         CurrTab.classList.remove("currTab");
         CurrTab = click;
         CurrTab.classList.add("currTab");
-        if(!search_section.classList.contains("active")){
-        search_section.classList.add("active");
-        your_wether_sec.classList.remove("active");
-        grantAccess_scr.classList.remove("active");
-        
-    }
-    else{
-        your_wether_sec.classList.remove("active");
-        search_section.classList.remove("active");
-        if(coordinates == null){
-            grantAccess_scr.classList.add("active");
-            loading.classList.remove("active");
+        if (!search_section.classList.contains("active")) {
+            search_section.classList.add("active");
+            your_wether_sec.classList.remove("active");
+            grantAccess_scr.classList.remove("active");
+
         }
-        else{
-        fetchwether();}
-    }
-    
-        
+        else {
+            your_wether_sec.classList.remove("active");
+            search_section.classList.remove("active");
+            if (coordinates == null) {
+                grantAccess_scr.classList.add("active");
+                loading.classList.remove("active");
+            }
+            else {
+                fetchwether();
+            }
+        }
+
+
     }
 }
 //-----tab change function end----------
@@ -108,7 +110,7 @@ async function api_call(cityname) {
 function datafill(weatherData) {
     your_wether_sec.classList.add("active");
     city.innerText = weatherData?.name;
-    tempture.innerText = `${((weatherData?.main?.temp) - 273.15).toFixed(2)} C`
+    tempture.innerText = `${((weatherData?.main?.temp) - 273.15).toFixed(2)} °C`
     sky.src = `https://flagcdn.com/144x108/${weatherData?.sys?.country.toLowerCase()}.png`;
     wtr_logo.src = `http://openweathermap.org/img/w/${weatherData?.weather?.[0]?.icon}.png`
 }
@@ -129,46 +131,45 @@ scr_button.addEventListener("click", () => {
 
 
 //your location temp -----------
-function yourwt(){
-    
-navigator.geolocation.getCurrentPosition(showpos);
+function yourwt() {
+    navigator.geolocation.getCurrentPosition(showpos);
 }
 
-function showpos(position){
+function showpos(position) {
     const userCoordinates = {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
     }
-    sessionStorage.setItem("user_coordinates", 
-    JSON.stringify(userCoordinates));
+    sessionStorage.setItem("user_coordinates",
+        JSON.stringify(userCoordinates));
     fetchwether();
 }
 
+
 //calling api ---of wether----------------
 
-async function fetchwether(){
-
-   
+async function fetchwether() {
+    coordinates = sessionStorage.getItem('user_coordinates');
     loading.classList.add("active");
     grantAccess_scr.classList.remove("active");
-let usercod = sessionStorage.getItem("user_coordinates");
-let codi = await JSON.parse(usercod);
-let lat = codi.lat;
-let lon = codi.lon;
-try{
-let API_key = "ac7c15cfceeae36d3ff1ed314502d3ce";
-console.log(lat);
-console.log(lon);
-let api = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}`); 
-console.log(api);
-let file = await api.json();
+    let usercod = sessionStorage.getItem("user_coordinates");
+    let codi = await JSON.parse(usercod);
+    let lat = codi.lat;
+    let lon = codi.lon;
+    try {
+        let API_key = "ac7c15cfceeae36d3ff1ed314502d3ce";
+        console.log(lat);
+        console.log(lon);
+        let api = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}`);
+        console.log(api);
+        let file = await api.json();
 
-datafill(file);
-console.log(file);
-}
-catch (e){
-    alert(`fail to fetch loaction ${e}`);
-}
-loading.classList.remove("active");
+        datafill(file);
+        console.log(file);
+    }
+    catch (e) {
+        alert(`fail to fetch loaction ${e}`);
+    }
+    loading.classList.remove("active");
 }
 
