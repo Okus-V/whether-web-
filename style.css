@@ -23,6 +23,7 @@
     padding-top: rem;
     color: var(--colorLight2);
     background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);
+    overflow: hidden;
     
 }
 
@@ -211,4 +212,41 @@
 
 .grant-acess.active {
     display: flex;
+}
+
+
+/* Media Query for Mobile Devices */
+@media only screen and (max-width: 600px) {
+    .Y-S-wearher-conitainer {
+        gap: 1rem; /* Adjust gap for smaller screens */
+    }
+
+    .searchbar-conitainer {
+        width: 100%; /* Adjust width for smaller screens */
+    }
+
+    .search-logo {
+        margin-left: 0; /* Adjust margin for smaller screens */
+    }
+
+    .city {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+
+    .sky-type {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .temp {
+        font-size: 2rem; /* Adjust font size for smaller screens */
+    }
+
+    .windspeed-coin {
+        width: 100%; /* Adjust width for smaller screens */
+    }
+
+    .grant-acess button {
+        padding: 8px 20px; /* Adjust padding for smaller screens */
+        font-size: 0.75rem; /* Adjust font size for smaller screens */
+    }
 }
